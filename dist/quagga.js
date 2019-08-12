@@ -5108,22 +5108,21 @@ function waitForVideo(video) {
  */
 function initCamera(video, constraints) {
     return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_mediaDevices__["a" /* getUserMedia */])(constraints).then(function (stream) {
-        try{
-
-            return new Promise(function (resolve) {
+        return new Promise(function (resolve) {
+            try {
                 streamRef = stream;
                 video.setAttribute("autoplay", true);
                 video.setAttribute('muted', true);
-            video.setAttribute('playsinline', true);
-            video.srcObject = stream;
-            video.addEventListener('loadedmetadata', function () {
-                video.play();
-                resolve();
-            });
+                video.setAttribute('playsinline', true);
+                video.srcObject = stream;
+                video.addEventListener('loadedmetadata', function () {
+                    video.play();
+                    resolve();
+                });
+            }
+            catch (e){
+            }
         });
-    }
-    catch {
-    }
     }).then(waitForVideo.bind(null, video));
 }
 
